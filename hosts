@@ -1,0 +1,8 @@
+[win-hosts]
+192.168.149.14 ansible_user=ansible-user ansible_password=password ansible_connection=winrm ansible_winrm_transport=basic ansible_winrm_server_cert_validation=ignore ansible_winrm_port=5985
+192.168.149.11 ansible_user=barzini\\Administrateur ansible_password=password ansible_connection=winrm ansible_winrm_transport=basic ansible_winrm_server_cert_validation=ignore ansible_winrm_port=5985
+
+[linux-hosts]
+192.168.149.10 ansible_user=ansible-user
+127.0.0.1 ansible_connection=local
+

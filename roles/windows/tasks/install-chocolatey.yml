@@ -1,0 +1,5 @@
+---
+
+- name: install chocolatey
+  win_shell: |
+    iex ((New-Object System.Net.WebClient).DownloadString("{{chocolatey_ps1_url}}"))

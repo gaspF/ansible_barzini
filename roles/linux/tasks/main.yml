@@ -1,0 +1,11 @@
+---
+
+- name: Include update linux tasks
+  include_tasks: update-linux.yml
+
+- name: Include install kontrast
+  include_tasks: install-kontrast.yml
+
+- name: Include activate user mountpoint
+  include_tasks: activate-user-mountpoint.yml
+

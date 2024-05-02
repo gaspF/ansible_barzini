@@ -1,0 +1,73 @@
+#- name: barzini_linux
+#  hosts: linux-hosts
+#  become : true
+
+#  tasks:
+#    - name: update OS
+#      apt:
+#        update_cache: yes
+#        upgrade: yes
+#        cache_valid_time: 86400
+
+#    - name: install kontrast
+#      apt:
+#        name: kontrast
+#        state: present
+
+#- name: local
+#  hosts: local
+#  become : true
+#  tasks:
+#    - name: update OS
+#      apt:
+#        update_cache: yes
+#        upgrade: yes
+#        cache_valid_time: 86400
+
+#    - name: install kontrast
+#      apt:
+#        name: kontrast
+#        state: present
+
+#    - name: insert user mountpoint into pam_mount xml configuration file
+#      ansible.builtin.shell:
+#        cmd: |
+#          insertBefore="<!-- pam_mount parameters: General tunables -->"
+#          insert='<volume options="nodev,nosuid" sgrp="users@barzini.local" mountpoint="\/media\/partage" path="partage" server="192.168.149.11" fstype="cifs" \/>'
+#          sudo sed -i "/$insertBefore/ i\ $insert" /etc/security/pam_mount.conf.xml
+#          if [ $? -ne 0 ]; then
+#            echo "Erreur : $? lors de l'insertion du contenu dans pam_mount.conf.xml"
+#            exit 1
+#          else
+#            echo "Contenu inséré avec succès dans pam_mount.conf.xml"
+#          fi
+
+- name: barzini-windows
+  hosts: win-hosts
+  become : false
+
+  tasks:  
+#    - name: update OS
+#      ignore_errors: yes
+#      ansible.windows.win_updates:
+#        category_names: '*'
+#        log_path: C:\temp\win-updates\ansible_wu.log
+#        state: installed        
+#        reboot: true
+#        server_selection: windows_update
+#        blacklist:
+#          - 576b0dd6-57cc-457n-a5ec-e888491b395d        
+#    - name: Set execution policy for current session
+#      win_shell: Set-ExecutionPolicy Bypass -Scope Process -Force      
+
+#    - name: install chocolatey
+#      win_shell: |
+#        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+#    - name: Installer Colour Contrast Analyzer
+#      win_shell: choco install colour-contrast-analyser -y
+    - name: copy the script if doesnt exists
+      win_copy:
+        src: /opt/barzini_ansible/mount_script.bat
+        dest: C:\temp\mount_script.bat
+

@@ -1,0 +1,6 @@
+---
+
+- name: copy mountpoint script
+  win_copy:
+    src: "{{src_path}}"
+    dest: "{{dest_path}}"

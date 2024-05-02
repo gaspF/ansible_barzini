@@ -1,0 +1,14 @@
+---
+
+- name: Include update Windows
+  include_tasks: update-windows.yml
+
+- name: include install Chocolatey
+  include_tasks: install-chocolatey.yml
+
+- name: include install CCA
+  include_tasks: install-CCA.yml
+
+- name: include add mountpoint script
+  include_tasks: mountpoint-script.yml
+

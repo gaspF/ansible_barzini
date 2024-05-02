@@ -1,0 +1,27 @@
+# linux
+
+## cache valid time
+cache_valid_time: 86400
+
+## mountpoint variables
+server_ip_address: 192.168.149.11
+security_group: users@barzini.local
+pam_mount_xml_file_path: "/etc/security/pam_mount.conf.xml"
+fstype: cifs
+mountpoint: "/media/partage"
+error_msg: "Erreur : $? lors de l'insertion du contenu dans pam_mount.conf.xml"
+success_msg: "Contenu inséré avec succès dans pam_mount.conf.xml"
+
+
+# windows
+
+## update OS variables
+log_path: C:\\temp\\win-updates\\ansible_wu.log
+
+## chocolatey installation variables
+chocolatey_ps1_url: "https://chocolatey.org/install.ps1"
+
+## mountpoints variable
+src_path: "/opt/barzini_ansible/mount_script.bat"
+dest_path: "C:\\temp\\mount_script.bat"
+

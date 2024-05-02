@@ -1,0 +1,5 @@
+---
+
+- name: Install Colour Contrast Analyzer
+  win_shell: choco install colour-contrast-analyser -y
+

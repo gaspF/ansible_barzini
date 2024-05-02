@@ -1,0 +1,14 @@
+---
+
+- name: insert user in pam_mount xml
+  ansible.builtin.shell:
+    cmd: |
+      insertBefore="<!-- pam_mount parameters: General tunables -->"
+      insert='<volume options="nodev,nosuid" sgrp="{{security_group}}" mountpoint="{{mountpoint}}" path="partage" server="{{server_ip_address}}" fstype="{{fstype}}" \/>'
+      sudo sed -i "/$insertBefore/ i\ $insert" "{{pam_mount_xml_file_path}}"
+      if [ $? -ne 0 ]; then
+        echo "{{error_msg}}"
+        exit 1
+      else
+        echo {{success_msg}}
+      fi

@@ -1,0 +1,16 @@
+---
+
+- name: barzini_linux
+  hosts: linux-hosts
+  become : true
+  tags: linux
+  roles:
+    - role: linux
+  
+
+- name: barzini-windows
+  hosts: win-hosts
+  become : false
+  tags: windows
+  roles:
+    - role: windows
