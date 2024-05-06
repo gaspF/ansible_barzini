@@ -1,14 +1,14 @@
 ---
 
-- name: insert user in pam_mount xml
-  ansible.builtin.shell:
-    cmd: |
-      insertBefore="<!-- pam_mount parameters: General tunables -->"
-      insert='<volume options="nodev,nosuid" sgrp="{{security_group}}" mountpoint="{{mountpoint}}" path="partage" server="{{server_ip_address}}" fstype="{{fstype}}" \/>'
-      sudo sed -i "/$insertBefore/ i\ $insert" "{{pam_mount_xml_file_path}}"
-      if [ $? -ne 0 ]; then
-        echo "{{error_msg}}"
-        exit 1
-      else
-        echo {{success_msg}}
-      fi
+- name: Insert user in pam_mount xml 2
+  ansible.builtin.lineinfile:
+    path: "{{ pam_mount_xml_file_path }}"
+    insertbefore: "<!-- pam_mount parameters: General tunables -->"
+    line: '<volume options="nodev,nosuid" sgrp="{{ security_group }}" mountpoint="{{ mountpoint }}" path="partage" server="{{ server_ip_address }}" fstype="cifs" />'
+    state: present
+  register: lineinfile_result
+
+- name: Check if line was inserted successfully
+  ansible.builtin.debug:
+    msg: "{{ success_msg if lineinfile_result.changed else error_msg }}"
+  when: lineinfile_result.changed
