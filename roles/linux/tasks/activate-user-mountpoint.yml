@@ -1,11 +1,19 @@
 ---
 
+- name: Check if line already exists in pam_mount xml
+  ansible.builtin.shell:
+    cmd: "grep -q '<volume options=\"nodev,nosuid\" sgrp=\"{{ security_group }}\" mountpoint=\"{{ mountpoint }}\" path=\"partage\" server=\"{{ server_ip_address }}\" fstype=\"cifs\" />' {{ pam_mount_xml_file_path }}"
+  register: grep_result
+  changed_when: false
+  ignore_errors: true
+
 - name: Insert user in pam_mount xml 2
   ansible.builtin.lineinfile:
     path: "{{ pam_mount_xml_file_path }}"
     insertbefore: "<!-- pam_mount parameters: General tunables -->"
     line: '<volume options="nodev,nosuid" sgrp="{{ security_group }}" mountpoint="{{ mountpoint }}" path="partage" server="{{ server_ip_address }}" fstype="cifs" />'
     state: present
+  when: grep_result.rc != 0
   register: lineinfile_result
 
 - name: Check if line was inserted successfully
