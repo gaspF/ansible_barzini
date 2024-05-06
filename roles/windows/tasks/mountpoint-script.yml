@@ -4,3 +4,17 @@
   win_copy:
     src: "{{src_path}}"
     dest: "{{dest_path}}"
+
+- name: Run copied script on luser logon
+  community.windows.win_scheduled_task:
+    name: RunScriptOnLogon
+    description: Run copied script on user logon
+    actions:
+      - path: "{{dest_path}}"
+        arguments: ""
+    triggers:
+      - type: logon
+    enabled: yes
+    run_level: highest
+    username: SYSTEM
+    state: present
