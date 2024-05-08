@@ -9,7 +9,7 @@
     reboot: true
     server_selection: windows_update
     blacklist:
-      - 576b0dd6-57cc-457n-a5ec-e888491b395d#    
+      - "KB5034441"
 
 - name: Set execution policy for current session
   win_shell: Set-ExecutionPolicy Bypass -Scope Process -Force
